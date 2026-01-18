@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { MapPin, Linkedin, ArrowDown } from "lucide-react"
+import { MapPin, Linkedin, Mail, ArrowDown } from "lucide-react"
 import Image from "next/image"
 
 export function HeroSection() {
@@ -39,7 +39,7 @@ export function HeroSection() {
             <div className="fade-up opacity-0 translate-y-8 transition-all duration-700 delay-100 [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm mb-6">
                 <MapPin className="w-4 h-4" />
-                <span>France</span>
+                <span>Paris, France</span>
               </div>
             </div>
 
@@ -72,6 +72,13 @@ export function HeroSection() {
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
+              </a>
+              <a
+                href="mailto:kosoewaihtoo@gmail.com"
+                className="inline-flex items-center gap-2 px-8 py-3 border border-slate-300 hover:border-blue-500/50 text-slate-700 hover:text-blue-600 dark:border-slate-700 dark:text-slate-300 dark:hover:text-white rounded-lg transition-all duration-200"
+              >
+                <Mail className="w-5 h-5" />
+                kosoewaihtoo@gmail.com
               </a>
             </div>
           </div>

@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
-import { Linkedin, MapPin, Send, CheckCircle } from "lucide-react"
+import { Linkedin, MapPin, Mail, Send, CheckCircle } from "lucide-react"
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -64,10 +64,27 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-slate-900 dark:text-white font-medium">Location</h3>
-                    <p className="text-slate-600 dark:text-slate-400">France</p>
+                    <p className="text-slate-600 dark:text-slate-400">Paris, France</p>
                   </div>
                 </div>
               </div>
+
+              <a
+                href="mailto:kosoewaihtoo@gmail.com"
+                className="block p-6 rounded-xl bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 hover:border-blue-500/30 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-500/20 transition-colors">
+                    <Mail className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-slate-900 dark:text-white font-medium">Email</h3>
+                    <p className="text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      kosoewaihtoo@gmail.com
+                    </p>
+                  </div>
+                </div>
+              </a>
 
               <a
                 href="https://www.linkedin.com/in/soe-wai-htoo-6b9a5b99/"
