@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
-import { Linkedin, MapPin, Mail, Send, CheckCircle } from "lucide-react"
+import { Linkedin, MapPin, Mail, Send, CheckCircle, AlertTriangle } from "lucide-react"
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -13,6 +13,8 @@ export function ContactSection() {
     message: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,13 +34,40 @@ export function ContactSection() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
+    setErrorMessage(null)
+
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT
+    if (!endpoint) {
+      setErrorMessage("Form is not connected yet. Please try again later.")
+      return
+    }
+
+    setIsSubmitting(true)
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error("Request failed")
+      }
+
+      setIsSubmitted(true)
       setFormState({ name: "", email: "", message: "" })
-    }, 3000)
+      form.reset()
+      setTimeout(() => setIsSubmitted(false), 3000)
+    } catch (error) {
+      setErrorMessage("Something went wrong. Please try again soon.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -119,6 +148,7 @@ export function ContactSection() {
           {/* Contact Form */}
           <div className="fade-up opacity-0 translate-y-8 transition-all duration-700 delay-200 [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0">
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Name
@@ -126,6 +156,7 @@ export function ContactSection() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   value={formState.name}
                   onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
@@ -141,6 +172,7 @@ export function ContactSection() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
@@ -155,6 +187,7 @@ export function ContactSection() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   value={formState.message}
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   rows={5}
@@ -166,14 +199,16 @@ export function ContactSection() {
 
               <button
                 type="submit"
-                disabled={isSubmitted}
-                className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-green-500 text-white font-medium rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/25"
+                disabled={isSubmitting || isSubmitted}
+                className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:text-slate-600 dark:disabled:text-slate-300 text-white font-medium rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/25"
               >
                 {isSubmitted ? (
                   <>
                     <CheckCircle className="w-5 h-5" />
                     Message Sent!
                   </>
+                ) : isSubmitting ? (
+                  <>Sending...</>
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
@@ -181,6 +216,12 @@ export function ContactSection() {
                   </>
                 )}
               </button>
+              {errorMessage ? (
+                <div className="flex items-start gap-2 text-sm text-amber-600 dark:text-amber-400">
+                  <AlertTriangle className="w-4 h-4 mt-0.5" />
+                  <span>{errorMessage}</span>
+                </div>
+              ) : null}
             </form>
           </div>
         </div>
