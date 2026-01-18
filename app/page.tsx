@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer"
 
 export default function Portfolio() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
       <Navigation />
       <HeroSection />
       <AboutSection />
