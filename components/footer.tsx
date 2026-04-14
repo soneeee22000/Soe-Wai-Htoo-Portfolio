@@ -7,18 +7,27 @@ export function Footer() {
             © {new Date().getFullYear()} Soe Wai Htoo. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#about" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#about"
+              className="text-sm text-slate-600 hover:text-teal-600 dark:text-slate-500 dark:hover:text-teal-400 transition-colors"
+            >
               About
             </a>
-            <a href="#projects" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#projects"
+              className="text-sm text-slate-600 hover:text-teal-600 dark:text-slate-500 dark:hover:text-teal-400 transition-colors"
+            >
               Projects
             </a>
-            <a href="#contact" className="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors">
+            <a
+              href="#contact"
+              className="text-sm text-slate-600 hover:text-teal-600 dark:text-slate-500 dark:hover:text-teal-400 transition-colors"
+            >
               Contact
             </a>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

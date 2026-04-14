@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { GraduationCap, MapPin } from "lucide-react"
+import { useEffect, useRef } from "react";
+import { GraduationCap, MapPin } from "lucide-react";
 
 const education = [
   {
@@ -10,10 +10,10 @@ const education = [
     location: "France",
     period: "Sep 2022 – Aug 2024",
     highlights: [
-      "Project Management & Strategic Planning",
-      "International Business & Operations",
-      "Financial Analysis & Decision-Making",
-      "Cross-cultural teamwork and communication",
+      "Project Management, Risk Analysis & Strategic Planning",
+      "International Business, Operations & Market Entry Strategy",
+      "Financial Analysis, Feasibility Studies & Decision-Making",
+      "Cross-cultural collaboration across multinational teams",
     ],
   },
   {
@@ -21,44 +21,52 @@ const education = [
     institution: "Lehman College, City University of New York",
     location: "USA",
     period: "Aug 2023 – Dec 2023",
-    highlights: ["Global business & management courses", "International teamwork and academic collaboration"],
+    highlights: [
+      "Completed graduate-level coursework in international business and management",
+      "Collaborated with students across 10+ nationalities in project-based assignments",
+    ],
   },
   {
     degree: "Bachelor's Degree – Marine Engineering",
     institution: "Myanmar Maritime University",
     location: "Myanmar",
     period: "Nov 2011 – Feb 2017",
-    highlights: ["GPA: 4.05 / 5", "Engineering fundamentals, ship systems, and technical design"],
+    highlights: [
+      "GPA: 4.05 / 5.0 — Top academic performance across engineering cohort",
+      "Core studies: Naval architecture, ship systems, structural design, hydrostatics, and marine engineering fundamentals",
+    ],
   },
-]
+];
 
 export function EducationSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-in")
+            entry.target.classList.add("animate-in");
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
-    const elements = sectionRef.current?.querySelectorAll(".fade-up")
-    elements?.forEach((el) => observer.observe(el))
+    const elements = sectionRef.current?.querySelectorAll(".fade-up");
+    elements?.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="education" ref={sectionRef} className="py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="fade-up opacity-0 translate-y-8 transition-all duration-700 [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0 text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">Education</h2>
-          <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            Education
+          </h2>
+          <div className="w-20 h-1 bg-teal-500 mx-auto rounded-full" />
         </div>
 
         <div className="space-y-8">
@@ -68,15 +76,19 @@ export function EducationSection() {
               className={`fade-up opacity-0 translate-y-8 transition-all duration-700 [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0`}
               style={{ transitionDelay: `${(index + 1) * 100}ms` }}
             >
-              <div className="p-6 md:p-8 rounded-xl bg-white/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5">
+              <div className="p-6 md:p-8 rounded-xl bg-white/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 hover:border-teal-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/5">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0">
+                    <div className="p-3 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 shrink-0">
                       <GraduationCap className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">{edu.degree}</h3>
-                      <p className="text-blue-600 dark:text-blue-400">{edu.institution}</p>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
+                        {edu.degree}
+                      </h3>
+                      <p className="text-teal-600 dark:text-teal-400">
+                        {edu.institution}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400 md:text-right">
@@ -84,15 +96,18 @@ export function EducationSection() {
                       <MapPin className="w-4 h-4" />
                       {edu.location}
                     </span>
-                    <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">
                       {edu.period}
                     </span>
                   </div>
                 </div>
                 <ul className="grid sm:grid-cols-2 gap-2 ml-16 md:ml-16">
                   {edu.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start gap-2 text-slate-700 dark:text-slate-300 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-slate-700 dark:text-slate-300 text-sm"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400 mt-2 shrink-0" />
                       {highlight}
                     </li>
                   ))}
@@ -103,5 +118,5 @@ export function EducationSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

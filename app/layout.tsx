@@ -1,40 +1,70 @@
-import type React from "react"
-import type { Metadata } from "next"
+import type React from "react";
+import type { Metadata } from "next";
 
-import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css"
-import { Inter, Geist_Mono, Source_Serif_4, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/theme-provider";
+import "./globals.css";
+import {
+  Inter,
+  Geist_Mono,
+  Source_Serif_4,
+  Inter as V0_Font_Inter,
+  Geist_Mono as V0_Font_Geist_Mono,
+  Source_Serif_4 as V0_Font_Source_Serif_4,
+} from "next/font/google";
 
 // Initialize fonts
-const _inter = V0_Font_Inter({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
+const _inter = V0_Font_Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const _geistMono = V0_Font_Geist_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const _sourceSerif_4 = V0_Font_Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
-const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
-const sourceSerif4 = Source_Serif_4({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const sourceSerif4 = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Soe Wai Htoo | Project Manager & Business Engineer",
   description:
-    "Portfolio of Soe Wai Htoo - Aspiring Project Manager with expertise in International Business Engineering, Data Analysis, and Quality Assurance.",
-    generator: 'v0.app'
-}
+    "Portfolio of Soe Wai Htoo - Project Manager & Engineer with 5+ years in marine construction, international business, and project coordination.",
+  generator: "v0.app",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
           <Analytics />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
