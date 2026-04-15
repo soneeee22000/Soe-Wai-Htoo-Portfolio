@@ -131,15 +131,14 @@ export function ExperienceSection() {
                           {exp.type}
                         </span>
                       </div>
-                      <ul
-                        className={`space-y-2 ${index % 2 === 0 ? "md:text-right" : ""}`}
-                      >
+                      <ul className="space-y-2.5 text-left">
                         {exp.description.map((item, i) => (
                           <li
                             key={i}
-                            className="text-slate-700 dark:text-slate-300 text-sm"
+                            className="flex items-start gap-2 text-slate-700 dark:text-slate-300 text-sm"
                           >
-                            {item}
+                            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400 mt-1.5 shrink-0" />
+                            <span>{item}</span>
                           </li>
                         ))}
                       </ul>
